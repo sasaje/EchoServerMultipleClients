@@ -5,17 +5,42 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-
     public static void main(String[] args) {
+        ServerSocket serverSocket = null;
+        Socket socket = null;
 
-        new Thread(() ->{
             try {
-                //Trin 1 - Lav serversocket
-                ServerSocket serverSocket = new ServerSocket(1709);
+                // Create a server socket
+                serverSocket = new ServerSocket(1978);
+            } catch (IOException ex) {
+                System.err.println(ex);
+            }
 
-                // Trin 2 - Få en socket til at lytte på den angivne port
-                System.out.println("Accepting connection on port 1709");
-                Socket socket = serverSocket.accept();
+            while (true) {
+
+                try{
+                    // Listen for a new connection request
+                    socket = serverSocket.accept();
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+                new HandleAClient(socket).start();
+            }
+        }
+    }
+    // Define the thread class for handling new connection
+    class HandleAClient extends Thread {
+        private Socket socket; // A connected socket
+
+        /** Construct a thread */
+        public HandleAClient(Socket socket) {
+            this.socket = socket;
+        }
+
+        /** Run a thread */
+        public void run() {
+            try {
+                System.out.println("Accepting connection on port 8000");
                 System.out.println("Connection established " + socket.getRemoteSocketAddress().toString());
 
                 //Trin 3 - Opret dataInputStream og dataOutputStream
@@ -30,13 +55,9 @@ public class Server {
                     outputStream.writeUTF("Tak for teksten: " + incomingText); // meddelelse om at serveren har modtaget læsningen
                     outputStream.flush(); // flush to send tekst
                 }
-
-                //Trin 5 - forbindelsen lukkes
-                //socket.close();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).start();
-    }
+        }
 }
+

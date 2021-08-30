@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Client {
+public class Client2 {
 
     public static void main(String[] args) {
-
-        try{
+        
+        try {
             // Trin 1 - lav socket
             Socket socket = new Socket("10.200.130.19", 1978);
 
@@ -20,8 +20,8 @@ public class Client {
             while(true){
                 Scanner scanner = new Scanner(System.in);
                 outputStream.writeUTF(scanner.nextLine());
-                System.out.println(inputStream.readUTF());
                 outputStream.flush();
+                System.out.println(inputStream.readUTF());
             }
 //            socket.close();
 
