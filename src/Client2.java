@@ -10,7 +10,7 @@ public class Client2 {
         
         try {
             // Trin 1 - lav socket
-            Socket socket = new Socket("10.200.130.19", 1978);
+            Socket socket = new Socket("localhost", 1978);
 
             //Trin 2 - Opret dataInputStream og dataOutputStream
             DataInputStream inputStream = new DataInputStream(socket.getInputStream());

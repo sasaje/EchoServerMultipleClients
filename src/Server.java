@@ -40,7 +40,7 @@ public class Server {
         /** Run a thread */
         public void run() {
             try {
-                System.out.println("Accepting connection on port 8000");
+                System.out.println("Accepting connection on port 1978");
                 System.out.println("Connection established " + socket.getRemoteSocketAddress().toString());
 
                 //Trin 3 - Opret dataInputStream og dataOutputStream
